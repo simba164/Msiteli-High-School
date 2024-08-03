@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Msithel High School</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/scripts.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="images/logo.png" alt="Msithel High School Logo" class="logo">
+            <h1>Msithel High School</h1>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="about">
+            <h2>About Msithel High School</h2>
+            <p>Msithel High School has been a pillar of academic excellence and community involvement. Our dedicated staff and comprehensive curriculum prepare students for success both in academics and life.</p>
+            <img src="images/school-building.jpg" alt="Msithel High School Building" class="about-img">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Msithel High School. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+<style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #800000; /* Maroon color */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.logo {
+    width: 100px;
+    vertical-align: middle;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+nav {
+    background-color: #b30000; /* Darker maroon */
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.hero {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    margin: 0;
+    color: #800000; /* Maroon color */
+}
+
+.info, .cta, .about, .academics, .events, .contact {
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.info p, .cta a, .about p, .academics ul, .events ul {
+    line-height: 1.6;
+}
+
+.about-img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #800000; /* Maroon border */
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #800000; /* Maroon color */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #b30000; /* Darker maroon */
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #800000; /* Maroon color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #b30000; /* Darker maroon */
+}
+
+footer {
+    background-color: #800000; /* Maroon color */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-open nav ul {
+        display: block;
+    }
+}
+</style>
+<script>
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const nodemailer = require('nodemailer');
+    
+    const app = express();
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+    
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'your-email@gmail.com',
+            pass: 'your-email-password'
+        }
+    });
+    
+    app.post('/submit-form', (req, res) => {
+        const { name, email, message } = req.body;
+        const mailOptions = {
+            from: email,
+            to: 'school-email@example.com',
+            subject: `Contact Form Submission from ${name}`,
+            text: message
+        };
+    
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(500).send('Error sending email');
+            }
+            res.status(200).send('Message sent successfully');
+        });
+    });
+    
+    app.listen(3000, () => {
+        console.log('Server running on port 3000');
+    });
+    </script>
